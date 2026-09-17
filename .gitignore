@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------- build ----
+build/
+# STM32CubeIDE builds into top-level Debug/ and Release/ folders
+Debug/
+Release/
+
+# ---------------------------------------------------------------- CMake ----
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CMakeUserPresets.json
+compile_commands.json
+
+# ------------------------------------------------- binaries / link output --
+*.elf
+*.bin
+*.hex
+*.srec
+*.map
+*.list
+*.o
+*.obj
+*.d
+*.a
+# -fstack-usage output from the STM32 toolchain
+*.su
+
+# ----------------------------------------------------------- Qt Creator ----
+.qtcreator/
+CMakeLists.txt.user*
+
+# ---------------------------------------------------------- other tools ----
+.vscode/
+.vs/
+.idea/
+# clangd background index
+.cache/
+
+# ------------------------------------------------------------ OS noise -----
+Thumbs.db
+desktop.ini
+.DS_Store
+*~
+*.bak
+*.orig
+*.rej
+
+# ----------------------------------------------------------- STM32CubeMX ---
+# .mxproject is regenerated on every code generation. It holds no
+# machine-specific paths, so it is tracked by default; uncomment to drop it.
+#.mxproject
+
+# ------------------------------------------------------------ local only ---
+# clangd config: hardcodes this machine's STM32CubeIDE toolchain paths
+.clangd
+# scratch screenshots
+image.png
