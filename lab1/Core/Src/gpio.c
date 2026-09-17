@@ -65,7 +65,7 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin : JOYCTR_Pin */
   GPIO_InitStruct.Pin = JOYCTR_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(JOYCTR_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED3_Pin */
@@ -78,20 +78,14 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pins : JOYA_Pin JOYB_Pin */
   GPIO_InitStruct.Pin = JOYA_Pin|JOYB_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : JOYC_Pin */
-  GPIO_InitStruct.Pin = JOYC_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(JOYC_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : JOYD_Pin */
-  GPIO_InitStruct.Pin = JOYD_Pin;
+  /*Configure GPIO pins : JOYC_Pin JOYD_Pin */
+  GPIO_InitStruct.Pin = JOYC_Pin|JOYD_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(JOYD_GPIO_Port, &GPIO_InitStruct);
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : LED1_Pin LED2_Pin */
   GPIO_InitStruct.Pin = LED1_Pin|LED2_Pin;

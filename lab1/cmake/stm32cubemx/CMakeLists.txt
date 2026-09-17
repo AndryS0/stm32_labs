@@ -75,14 +75,6 @@ target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 # Add STM32CubeMX generated application sources to the project
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MX_Application_Src})
 
-target_include_directories(stm32cubemx INTERFACE
-${CMAKE_CURRENT_SOURCE_DIR}/../../App/Inc
-)
-
-target_sources(${CMAKE_PROJECT_NAME} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/../../App/Src/lab1.cpp
-)
-
 # Link directories setup
 target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MX_LINK_DIRS})
 
