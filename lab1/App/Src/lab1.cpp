@@ -1,5 +1,6 @@
 #include "lab1.h"
 #include "gpio.h"
+#include "tim.h"
 
 static constexpr unsigned MIN_TIME_S = 1;
 static constexpr unsigned MAX_TIME_S = 5;
@@ -12,8 +13,7 @@ static unsigned          highlighted_pin = 0;
 static unsigned next_pin(unsigned i) { return i + 1 == LED_COUNT ? 0 : i + 1; }
 static unsigned prev_pin(unsigned i) { return i == 0 ? LED_COUNT - 1 : i - 1; }
 
-// interrupt handling for joystick buttons
-extern "C" void HAL_GPIO_EXTI_Callback(uint16_t pin)
+static void on_press(unsigned pin)
 {
     switch (pin) {
     case JOYA_Pin:   if (step_time_s < MAX_TIME_S) step_time_s++; break;  // ^
@@ -22,6 +22,34 @@ extern "C" void HAL_GPIO_EXTI_Callback(uint16_t pin)
     case JOYC_Pin:   state = State::LeftRun;  break;                      // <
     case JOYCTR_Pin: state = State::Stopped;  break;                      // center
     default: break;
+    }
+}
+
+// each callback restarts settle window of button state
+extern "C" void HAL_GPIO_EXTI_Callback(uint16_t)
+{
+    __HAL_TIM_SET_COUNTER(&htim7, 0);
+    // HAL_TIM_Base_Init raises an update event to load the prescaler, so UIF may
+    // already be pending on the first start; without this the callback would
+    // fire immediately instead of one period later.
+    __HAL_TIM_CLEAR_FLAG(&htim7, TIM_FLAG_UPDATE);
+    HAL_TIM_Base_Start_IT(&htim7);
+}
+
+// this method invokes only when settle window passes, so states are trustworhy
+extern "C" void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+    if (htim->Instance != TIM7) return;
+    HAL_TIM_Base_Stop_IT(&htim7);
+
+    // last confirmed state of each button
+    static bool held[JOY_COUNT] = {};
+
+    for (unsigned i = 0; i < JOY_COUNT; i++) {
+        const bool now_held =
+            HAL_GPIO_ReadPin(JOY[i].port, JOY[i].pin) == GPIO_PIN_RESET; // active-low
+        if (now_held && !held[i]) on_press(JOY[i].pin);
+        held[i] = now_held;
     }
 }
 
@@ -42,6 +70,7 @@ int main()
     HAL_Init();
     SystemClock_Config();
     generated_MPU_Config();
+    MX_TIM7_Init();
     MX_GPIO_Init();
 
     highlight_pin(highlighted_pin);

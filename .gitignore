@@ -46,9 +46,9 @@ desktop.ini
 *.rej
 
 # ----------------------------------------------------------- STM32CubeMX ---
-# .mxproject is regenerated on every code generation. It holds no
-# machine-specific paths, so it is tracked by default; uncomment to drop it.
-#.mxproject
+# .mxproject is regenerated on every code generation and only records which
+# files CubeMX emitted last, so it is not tracked.
+.mxproject
 
 # ------------------------------------------------------------ local only ---
 # clangd config: hardcodes this machine's STM32CubeIDE toolchain paths

@@ -16,6 +16,21 @@ const LED LEDS[] = {
 };
 const unsigned LED_COUNT = sizeof(LEDS) / sizeof(LED);
 
+struct Button
+{
+    GPIO_TypeDef* port;
+    unsigned pin;
+};
+
+const Button JOY[] = {
+    {JOYA_GPIO_Port,   JOYA_Pin  },
+    {JOYB_GPIO_Port,   JOYB_Pin  },
+    {JOYC_GPIO_Port,   JOYC_Pin  },
+    {JOYD_GPIO_Port,   JOYD_Pin  },
+    {JOYCTR_GPIO_Port, JOYCTR_Pin}
+};
+const unsigned JOY_COUNT = sizeof(JOY) / sizeof(Button);
+
 // current task state enum
 enum class State : unsigned
 {

@@ -32,7 +32,12 @@
 
 /* USER CODE END 1 */
 
-/** Configure pins
+/** Configure pins as
+        * Analog
+        * Input
+        * Output
+        * EVENT_OUT
+        * EXTI
 */
 void MX_GPIO_Init(void)
 {
@@ -64,7 +69,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : JOYCTR_Pin */
   GPIO_InitStruct.Pin = JOYCTR_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(JOYCTR_GPIO_Port, &GPIO_InitStruct);
 
@@ -77,13 +82,13 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : JOYA_Pin JOYB_Pin */
   GPIO_InitStruct.Pin = JOYA_Pin|JOYB_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
   /*Configure GPIO pins : JOYC_Pin JOYD_Pin */
   GPIO_InitStruct.Pin = JOYC_Pin|JOYD_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
