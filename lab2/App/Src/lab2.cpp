@@ -2,7 +2,7 @@
 #include "gpio.h"
 #include "tim.h"
 
-static uint16_t led_r = 0, led_g = 0, led_b = 0;
+static uint16_t led_r = 5, led_g = 5, led_b = 5;
 const uint16_t inc_r = 5, inc_g = 10, inc_b = 30;
 const uint16_t led_min = 5, led_max = 95;
 
