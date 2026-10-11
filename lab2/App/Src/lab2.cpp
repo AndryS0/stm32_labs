@@ -80,6 +80,7 @@ int main()
     HAL_TIM_PWM_Start(PWM_TIMER, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(PWM_TIMER, TIM_CHANNEL_2);
     HAL_TIM_PWM_Start(PWM_TIMER, TIM_CHANNEL_3);
+    rgb_set(led_r, led_g, led_b);
     while (1)
     {
         __WFI();
