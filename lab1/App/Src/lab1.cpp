@@ -91,8 +91,8 @@ int main()
             HAL_GetTick() - last_step >= step_time_s * 1000u)
         {
             last_step = HAL_GetTick();
-            highlighted_pin = (s == State::LeftRun) ? next_pin(highlighted_pin)
-                                                    : prev_pin(highlighted_pin);
+            highlighted_pin = (s == State::LeftRun) ? prev_pin(highlighted_pin)
+                                                    : next_pin(highlighted_pin);
             highlight_pin(highlighted_pin);
         }
 
